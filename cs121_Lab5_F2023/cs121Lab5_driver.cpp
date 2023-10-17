@@ -95,7 +95,6 @@ string getInputFileName()
     cout << "Please enter the fully qualified name of the " << endl
          << "input text file (i.e. including the path): ";
     cin >> fName;
-	
     cout << endl; // skip a line
 
     return fName;
@@ -160,6 +159,7 @@ int numWordsInFile( ifstream &in )
 
     char whsp;							//stores char from file read
     char word = 'O';					//keep track if In or Out of word
+    char iwshp;                         //keep track of in.peek()
     //O is for "out" of the word
     //use I for "in" the word
 
@@ -172,18 +172,30 @@ int numWordsInFile( ifstream &in )
     while (!in.eof()) 
     {
         whsp = in.get();
+        iwshp = in.peek();
+        bool iswhsp = white_space;
         if(white_space)
         {
-            word = 0;
-            whsp == in.peek();
-            if(!white_space)
-               ++numWords;
+            word = 'O';
+            whsp = in.peek();
+            if (!white_space && word == 'O')
+            {
+                numWords += 1;
+                word = '1';
+                continue;
+            }
         }
-        else
+        else if (!white_space) 
         {
-            word = 1;
-            continue;
+            whsp = in.peek();
+            if (white_space)
+            {
+                numWords += 1;
+                word = '1';
+                continue;
+            }
         }
+        word = '1';
     }
 
 
