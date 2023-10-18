@@ -94,7 +94,33 @@ string getInputFileName()
 
     cout << "Please enter the fully qualified name of the " << endl
          << "input text file (i.e. including the path): ";
-    cin >> fName;
+    char v = cin.get();
+    //This while loop is to handle odd characters in the file path.
+    while (v != '\n') 
+    {
+        switch (v)
+        {
+            case '\\':
+                fName += '\\';
+                v = cin.get();
+                break;
+
+            case '\"':
+                fName += '\"';
+                v = cin.get();
+                break;
+
+            case '\'':
+                fName += '\'';
+                v = cin.get();
+                break;
+
+            default:
+                fName += v;
+                v = cin.get();
+                continue;
+        }
+    }
     cout << endl; // skip a line
 
     return fName;
