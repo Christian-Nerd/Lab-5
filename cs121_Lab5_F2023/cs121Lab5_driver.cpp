@@ -180,7 +180,7 @@ int numWordsInFile( ifstream &in )
             whsp = in.peek();
             if (!white_space && word == 'O')
             {
-                numWords += 1;
+                numWords++;
                 word = '1';
                 continue;
             }
@@ -188,9 +188,9 @@ int numWordsInFile( ifstream &in )
         else if (!white_space) 
         {
             whsp = in.peek();
-            if (white_space)
+            if (white_space && word == 1)
             {
-                numWords += 1;
+                numWords++;
                 word = '1';
                 continue;
             }
